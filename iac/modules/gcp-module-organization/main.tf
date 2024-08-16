@@ -129,6 +129,5 @@ resource "google_folder" "realm_folders" {
 resource "google_folder" "foundation_folders" {
   for_each = local.all_foundations
   display_name = each.value.name
-  test = google_folder.foundation_folders["test"].folder_id
   parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : google_folder.realm_folders[each.value.parent].name
 }
