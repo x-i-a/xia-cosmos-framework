@@ -18,16 +18,25 @@ locals {
 locals {
   level_1_realms = {
     for realm, details in local.realms : realm => {
+      name = realm
       parent = "root"
     }
   }
-  level_2_realms = merge(
-    {for realm, details in local.realms : realm => {
-      for sub_realm in keys(lookup(details, "realms", {})) : sub_realm => {
-        parent = realm
-      }
-    }}
-  )
+
+  level_2_realms = {
+    for idx, pair in flatten([
+      for realm, details in local.realms : [
+        for sub_realm in keys(details.realms) : {
+          realm = realm
+          sub_realm = sub_realm
+        }
+      ]
+    ]) : "${pair.realm}-${pair.sub_realm}" => {
+      parent = pair.realm
+      name = pair.sub_realm
+    }
+  }
+
   all_realms = merge(local.level_1_realms, local.level_2_realms)
 }
 
