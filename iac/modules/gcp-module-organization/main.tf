@@ -120,14 +120,31 @@ data "google_organization" "cosmos_org" {
   domain = local.cosmos_org
 }
 
-resource "google_folder" "realm_folders" {
-  for_each = local.all_realms
+resource "google_folder" "realm_l1_folders" {
+  for_each = local.level_1_realms
   display_name = each.value.name
-  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : google_folder.realm_folders[each.value.parent].name
+  parent       = "organizations/${data.google_organization.cosmos_org.org_id}"
+}
+
+resource "google_folder" "realm_l2_folders" {
+  for_each = local.level_2_realms
+  display_name = each.value.name
+  parent       = google_folder.realm_l1_folders[each.value.parent].name
+}
+
+resource "google_folder" "realm_l3_folders" {
+  for_each = local.level_3_realms
+  display_name = each.value.name
+  parent       = google_folder.realm_l2_folders[each.value.parent].name
 }
 
 resource "google_folder" "foundation_folders" {
-  for_each = local.all_foundations
+  for_each = local.level_0_foundations
   display_name = each.value.name
-  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : google_folder.realm_folders[each.value.parent].name
+  parent       = coalesce(
+    lookup(google_folder.realm_l1_folders, each.value.parent, null),
+    lookup(google_folder.realm_l2_folders, each.value.parent, null),
+    lookup(google_folder.realm_l3_folders, each.value.parent, null),
+    "organizations/${data.google_organization.cosmos_org.org_id}"
+  )
 }
