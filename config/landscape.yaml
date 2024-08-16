@@ -3,6 +3,8 @@ settings:
   cosmos_project: xia-cosmos
   cosmos_org: x-i-a.com
   github_owner: x-i-a
+  github_tpl_owner: x-i-a
+  github_tpl_foundation: xia-template-foundation
 structure:
   realms:
     protocol:
