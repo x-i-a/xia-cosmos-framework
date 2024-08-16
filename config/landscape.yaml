@@ -10,6 +10,8 @@ structure:
         realm-1-1:
           realms:
             realm-1-1-1:
+              foundations:
+                foundation-1-1-1-a:
           foundations:
             foundation-1-1-a:
       foundations:

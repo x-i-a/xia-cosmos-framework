@@ -58,6 +58,22 @@ locals {
     }
   }
 
+  level_2_foundations = {
+    for idx, pair in flatten([
+      for realm, details in lookup(local.structure, "realms", {}) : [
+        for sub_realm, sub_details in lookup(details, "realms", {}) : [
+          for foundation, foundation_details in lookup(sub_details, "foundations", {}) : {
+            realm = realm
+            sub_realm = sub_realm
+            bis_realm = bis_realm
+          }
+        ]
+      ]
+    ]) : "${pair.realm}/${pair.sub_realm}/${pair.foundation}" => {
+      parent = pair.sub_realm
+      name = pair.foundation
+    }
+  }
 
   level_3_realms = {
     for idx, pair in flatten([
@@ -77,7 +93,7 @@ locals {
   }
 
   all_realms = merge(local.level_1_realms, local.level_2_realms, local.level_3_realms)
-  all_foundations = merge(local.level_0_foundations, local.level_1_foundations)
+  all_foundations = merge(local.level_0_foundations, local.level_1_foundations, local.level_2_foundations)
 }
 
 data "google_organization" "cosmos_org" {
