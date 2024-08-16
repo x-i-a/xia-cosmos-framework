@@ -38,7 +38,7 @@ locals {
           foundation = foundation
         }
       ]
-    ]) : pair.realm => {
+    ]) : "${pair.realm}/${pair.foundation}" => {
       parent = pair.realm
       name = pair.foundation
     }
