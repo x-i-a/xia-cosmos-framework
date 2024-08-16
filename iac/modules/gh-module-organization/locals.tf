@@ -8,6 +8,7 @@ locals {
   github_owner = lookup(local.settings, "github_owner", "")
   template_owner = lookup(local.settings, "github_tpl_owner", "")
   template_repo = lookup(local.settings, "github_tpl_foundation", "")
+  github_visibility = lookup(local.settings, "github_visibility", "public")
 }
 
 locals {
@@ -16,7 +17,6 @@ locals {
       name = foundation
       parent = "root"
       repository = lookup(foundation_details == null ?  {} : foundation_details, "repository", "foundation-${foundation}")
-      template_owner =
     }
   }
 

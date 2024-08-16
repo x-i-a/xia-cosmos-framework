@@ -12,7 +12,7 @@ resource "github_repository" "foundation-repository" {
   name        = each.value.repository
   description = "Foundation: ${each.value.name}"
 
-  visibility = "public"
+  visibility = local.github_visibility
 
   template {
     owner                = local.template_owner
