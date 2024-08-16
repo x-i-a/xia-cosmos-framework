@@ -5,7 +5,7 @@ settings:
   github_owner: x-i-a
 structure:
   realms:
-    governance:
+    protocol:
       foundations:
         xia-framework:
           repository: xia-foundation-framework
