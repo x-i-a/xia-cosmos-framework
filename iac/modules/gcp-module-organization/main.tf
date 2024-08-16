@@ -12,7 +12,7 @@ locals {
   cosmos_org = local.settings["cosmos_org"]
   cosmos_project = local.settings["cosmos_project"]
   cosmos_name = local.settings["cosmos_name"]
-  realms = local.settings["structure"]["realms"]
+  realms = local.landscape["structure"]["realms"]
 }
 
 locals {
