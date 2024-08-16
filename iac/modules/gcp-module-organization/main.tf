@@ -86,12 +86,12 @@ data "google_organization" "cosmos_org" {
 
 resource "google_folder" "realm_folders" {
   for_each = local.all_realms
-  display_name = "TF Folder Test"
+  display_name = each.value.name
   parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : each.value.parent
 }
 
-resource "google_folder" "realm_folders" {
-  for_each = local.all_realms
-  display_name = "TF Folder Test"
+resource "google_folder" "foundation_folders" {
+  for_each = local.all_foundations
+  display_name = each.value.name
   parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : each.value.parent
 }
