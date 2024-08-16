@@ -1,4 +1,4 @@
-.PHONY: all init create
+.PHONY: all bigbang birth apply init-module create-application
 
 all:
 	@echo "Specify a command to run"
@@ -8,21 +8,38 @@ init:
 	until [ -f .venv/bin/python3 ]; do sleep 1; done; \
 	until [ -f .venv/bin/activate ]; do sleep 1; done;
 	. .venv/bin/activate; \
-	pip install PyYAML xia-framework keyring setuptools wheel jinja2; \
+	pip install PyYAML xia-framework keyring setuptools wheel; \
     pip install keyrings.google-artifactregistry-auth; \
 
-init-module: init
-	@if [ -z "$(module_name)" ]; then \
-	  echo "Module name not specified. Usage: make init-module module_name=<module_name>"; \
+bigbang: init
+	@if [ -z "$(realm_project)" ]; then \
+		echo "Realm project not specified. Usage: make bigbang realm_project=<realm_project>"; \
 	else \
-	  . .venv/bin/activate; \
-	  python -m xia_framework.application init-module -n $(module_name); \
+		python main.py bigbang -p $(realm_project); \
 	fi
 
-upgrade-module: init
-	@if [ -z "$(module_name)" ]; then \
-	  echo "Module name not specified. Usage: make upgrade-module module_name=<module_name>"; \
+birth: init
+	@if [ -z "$(foundation_name)" ]; then \
+		echo "Foundation name not specified. Usage: make birth foundation_name=<foundation_name>"; \
 	else \
-	  . .venv/bin/activate; \
-	  python -m xia_framework.application upgrade-module -n $(module_name); \
+	    . .venv/bin/activate; \
+		python main.py birth -n $(foundation_name); \
+	fi
+
+apply: init
+	@. .venv/bin/activate; \
+	python main.py prepare
+
+init-module: init
+	@if [ -z "$(module_class)" ] || [ -z "$(package)" ]; then \
+		echo "Module name not specified. Usage: make init-module module_class=<module_class> package=<package>"; \
+	else \
+		python main.py init-module -m $(module_class) -p $(package); \
+	fi
+
+create-app: init
+	@if [ -z "$(app_name)" ]; then \
+		echo "Application name not specified. Usage: make create-app app_name=<app_name>"; \
+	else \
+		python main.py create-app $(app_name); \
 	fi
