@@ -65,7 +65,7 @@ locals {
           for foundation, foundation_details in lookup(sub_details, "foundations", {}) : {
             realm = realm
             sub_realm = sub_realm
-            bis_realm = bis_realm
+            foundation = foundation
           }
         ]
       ]
