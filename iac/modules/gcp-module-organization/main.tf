@@ -26,7 +26,7 @@ locals {
   level_2_realms = {
     for idx, pair in flatten([
       for realm, details in local.realms : [
-        for sub_realm in keys(details.realms) : {
+        for sub_realm in keys(lookup(details, "realms", {})) : {
           realm = realm
           sub_realm = sub_realm
         }
