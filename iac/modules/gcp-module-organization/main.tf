@@ -148,3 +148,12 @@ resource "google_folder" "foundation_folders" {
     "organizations/${data.google_organization.cosmos_org.org_id}"
   )
 }
+
+resource "google_service_account" "foundation_admin_sa" {
+  for_each = local.all_foundations
+  project      = local.cosmos_project
+  account_id   = "dir-${each.value.name}-sa"
+  display_name = "Service Account for Foundation Directory ${each.value["name"]}"
+
+  depends_on = [google_folder.foundation_folders]
+}
