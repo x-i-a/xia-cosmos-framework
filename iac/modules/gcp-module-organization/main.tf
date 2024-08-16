@@ -141,5 +141,11 @@ resource "google_folder" "realm_l3_folders" {
 resource "google_folder" "foundation_folders" {
   for_each = local.all_foundations
   display_name = each.value.name
-  parent       = lookup(google_folder.realm_l1_folders, each.value.parent, null)
+  parent       = lookup(google_folder.realm_l1_folders, each.value.parent,
+                   lookup(google_folder.realm_l2_folders, each.value.parent,
+                     lookup(google_folder.realm_l3_folders, each.value.parent,
+                       "organizations/${data.google_organization.cosmos_org.org_id}"
+                     )
+                   )
+                 )
 }
