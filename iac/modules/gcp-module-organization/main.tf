@@ -142,9 +142,9 @@ resource "google_folder" "foundation_folders" {
   for_each = local.all_foundations
   display_name = each.value.name
   parent       = coalesce(
-    lookup(lookup(google_folder.realm_l1_folders, each.value.parent, {}), "name", "")
-    lookup(lookup(google_folder.realm_l2_folders, each.value.parent, {}), "name", "")
-    lookup(lookup(google_folder.realm_l3_folders, each.value.parent, {}), "name", "")
+    lookup(lookup(google_folder.realm_l1_folders, each.value.parent, {}), "name", ""),
+    lookup(lookup(google_folder.realm_l2_folders, each.value.parent, {}), "name", ""),
+    lookup(lookup(google_folder.realm_l3_folders, each.value.parent, {}), "name", ""),
     "organizations/${data.google_organization.cosmos_org.org_id}"
   )
 }
