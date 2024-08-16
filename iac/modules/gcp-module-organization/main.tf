@@ -70,7 +70,7 @@ locals {
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.foundation}" => {
-      parent = pair.sub_realm
+      parent = "${pair.realm}/${pair.sub_realm}"
       name = pair.foundation
     }
   }
@@ -87,7 +87,7 @@ locals {
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}" => {
-      parent = pair.sub_realm
+      parent = "${pair.realm}/${pair.sub_realm}"
       name = pair.bis_realm
     }
   }
@@ -107,7 +107,7 @@ locals {
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}/${pair.foundation}" => {
-      parent = pair.bis_realm
+      parent = "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}"
       name = pair.foundation
     }
   }
@@ -123,11 +123,12 @@ data "google_organization" "cosmos_org" {
 resource "google_folder" "realm_folders" {
   for_each = local.all_realms
   display_name = each.value.name
-  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : each.value.parent
+  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : google_folder.realm_folders[each.value.parent].name
 }
 
 resource "google_folder" "foundation_folders" {
   for_each = local.all_foundations
   display_name = each.value.name
-  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : each.value.parent
+  test = google_folder.foundation_folders["test"].folder_id
+  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : google_folder.realm_folders[each.value.parent].name
 }
