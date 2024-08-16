@@ -21,7 +21,14 @@ locals {
       parent = "root"
     }
   }
-  all_realms = merge(local.level_1_realms)
+  level_2_realms = merge([
+    for realm, details in local.realms : {
+      for sub_realm in keys(lookup(details, "realms", {})) : sub_realm => {
+        parent = realm
+      }
+    }
+  ])
+  all_realms = merge(local.level_1_realms, local.level_2_realms)
 }
 
 data "google_organization" "cosmos_org" {
