@@ -139,7 +139,7 @@ resource "google_folder" "realm_l3_folders" {
 }
 
 resource "google_folder" "foundation_folders" {
-  for_each = local.level_0_foundations
+  for_each = local.all_foundations
   display_name = each.value.name
   parent       = coalesce(
     lookup(google_folder.realm_l1_folders, each.value.parent, null),
