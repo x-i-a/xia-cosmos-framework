@@ -5,18 +5,3 @@ settings:
   github_owner: x-i-a
 structure:
   realms:
-    realm-1:
-      realms:
-        realm-1-1:
-          realms:
-            realm-1-1-1:
-              foundations:
-                foundation-1-1-1-a:
-          foundations:
-            foundation-1-1-a:
-      foundations:
-        foundation-1-a:
-    realm-2:
-      foundations:
-        foundation-2-a:
-        foundation-2-b:
