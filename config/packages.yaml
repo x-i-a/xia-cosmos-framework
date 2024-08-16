@@ -1,5 +1,9 @@
 repositories:
   default:
+  develop:
+    git_https: github.com/x-i-a
 
 packages:
   xia-module:
+  xia-module-gcp-project:
+    repository: develop
