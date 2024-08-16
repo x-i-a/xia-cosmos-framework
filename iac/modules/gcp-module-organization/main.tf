@@ -31,7 +31,5 @@ data "google_organization" "cosmos_org" {
 resource "google_folder" "realm_folders" {
   for_each = local.all_realms
   display_name = "TF Folder Test"
-  parent       = each.value.parent == "root" ?
-                 "organizations/${data.google_organization.cosmos_org.org_id}" :
-                 each.value.parent
+  parent       = each.value.parent == "root" ? "organizations/${data.google_organization.cosmos_org.org_id}" : each.value.parent
 }
