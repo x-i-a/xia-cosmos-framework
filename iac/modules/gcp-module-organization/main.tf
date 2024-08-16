@@ -9,14 +9,29 @@ terraform {
 locals {
   landscape = yamldecode(file(var.landscape_file))
   settings = lookup(local.landscape, "settings", {})
+  cosmos_org = local.settings["cosmos_org"]
+  cosmos_project = local.settings["cosmos_project"]
   cosmos_name = local.settings["cosmos_name"]
+  realms = local.settings["structure"]["realms"]
 }
 
-data "google_organization" "my_org" {
-  domain = "x-i-a.com"
+locals {
+  level_1_realms = {
+    for realm, details in local.realms : realm => {
+      parent = "root"
+    }
+  }
+  all_realms = merge(local.level_1_realms)
 }
 
-resource "google_folder" "my_folder" {
+data "google_organization" "cosmos_org" {
+  domain = local.cosmos_org
+}
+
+resource "google_folder" "realm_folders" {
+  for_each = local.all_realms
   display_name = "TF Folder Test"
-  parent       = "organizations/${data.google_organization.my_org.org_id}"
+  parent       = each.value.parent == "root" ?
+                 "organizations/${data.google_organization.cosmos_org.org_id}" :
+                 each.value.parent
 }
