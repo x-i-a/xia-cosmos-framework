@@ -34,17 +34,16 @@ def main():
 
     # Handle different commands
     cosmos = Cosmos()
-    foundation = Foundation()
     if args.command == 'bigbang':
         cosmos.bigbang(cosmos_name=args.realm_project, realm_name=args.realm_name)
     if args.command == 'birth':
-        foundation.birth(foundation_name=args.foundation_name)
+        cosmos.birth(foundation_name=args.foundation_name)
     if args.command == 'prepare':
-        foundation.prepare(args.skip_terraform)
+        cosmos.prepare(args.skip_terraform)
     elif args.command == 'init-module':
-        foundation.init_module(package=args.package, module_class=args.module_class)
+        cosmos.init_module(package=args.package, module_class=args.module_class)
     elif args.command == 'create-app':
-        foundation.create_app(app_name=args.app_name)
+        cosmos.create_app(app_name=args.app_name)
     else:
         # If no command is provided, show help
         parser.print_help()
