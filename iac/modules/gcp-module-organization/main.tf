@@ -54,7 +54,7 @@ locals {
     }
   }
 
-  all_realms = merge(local.level_1_realms, local.level_2_realms, , local.level_3_realms)
+  all_realms = merge(local.level_1_realms, local.level_2_realms, local.level_3_realms)
 }
 
 data "google_organization" "cosmos_org" {
