@@ -161,5 +161,5 @@ resource "google_folder_iam_member" "foundation_admin_sa_owner" {
   for_each = local.all_foundations
   folder = google_folder.foundation_folders[each.key].name
   role = "roles/owner"
-  member = "serviceAccount:${google_service_account.foundation_admin_sa[each.key].id}"
+  member = "serviceAccount:${google_service_account.foundation_admin_sa[each.key].email}"
 }
