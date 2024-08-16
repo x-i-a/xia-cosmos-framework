@@ -5,20 +5,3 @@ settings:
   foundation_region: eu
   github_owner: x-i-a
   pip_index_url: https://europe-west1-python.pkg.dev/xia-framework-prd/pypi/simple
-environments:
-  dev:
-    match_branch: refs/heads/main
-  sit:
-    match_branch: refs/tags/.*
-  prd:
-    match_branch: refs/tags/.*
-    match_event: release
-modules:
-  gcp-module-pypi:
-    repository_region: europe-west1
-    applications:
-      - xia-framework
-      - xia-module
-  gcp-module-dataset:
-    applications:
-      - xia-demo-framework-01
