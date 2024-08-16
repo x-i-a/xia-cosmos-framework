@@ -7,5 +7,6 @@ structure:
   realms:
     governance:
       foundations:
-        repository: xia-foundation-framework
         xia-framework:
+          repository: xia-foundation-framework
+
