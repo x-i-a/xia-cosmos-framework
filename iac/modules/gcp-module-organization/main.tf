@@ -154,6 +154,12 @@ resource "google_service_account" "foundation_admin_sa" {
   project      = local.cosmos_project
   account_id   = "dir-${each.value.name}-sa"
   display_name = "Service Account for Foundation Directory ${each.value["name"]}"
-
   depends_on = [google_folder.foundation_folders]
+}
+
+resource "google_folder_iam_member" "foundation_admin_sa_owner" {
+  for_each = local.all_foundations
+  folder = google_folder.foundation_folders[each.key].name
+  role = "roles/owner"
+  member = google_service_account.foundation_admin_sa[each.key]
 }
