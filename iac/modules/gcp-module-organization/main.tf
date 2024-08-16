@@ -31,13 +31,30 @@ locals {
           sub_realm = sub_realm
         }
       ]
-    ]) : "${pair.realm}-${pair.sub_realm}" => {
+    ]) : "${pair.realm}/${pair.sub_realm}" => {
       parent = pair.realm
       name = pair.sub_realm
     }
   }
 
-  all_realms = merge(local.level_1_realms, local.level_2_realms)
+  level_3_realms = {
+    for idx, pair in flatten([
+      for realm, details in local.realms : [
+        for sub_realm, sub_details in lookup(details, "realms", {}) : [
+          for bis_realm, bis_details in lookup(sub_details, "realms", {}) : {
+            realm = realm
+            sub_realm = sub_realm
+            bis_realm = bis_realm
+          }
+        ]
+      ]
+    ]) : "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}" => {
+      parent = pair.sub_realm
+      name = pair.bis_realm
+    }
+  }
+
+  all_realms = merge(local.level_1_realms, local.level_2_realms, , local.level_3_realms)
 }
 
 data "google_organization" "cosmos_org" {
