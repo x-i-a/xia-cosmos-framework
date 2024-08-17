@@ -1,5 +1,6 @@
 settings:
   cosmos_name: xia-cosmos
+  cosmos_bucket: xia-cosmos
   cosmos_project: xia-cosmos
   cosmos_org: x-i-a.com
   github_owner: x-i-a
