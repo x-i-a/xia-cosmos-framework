@@ -11,12 +11,3 @@ structure:
       foundations:
         xia-framework:
           repository: xia-foundation-framework
-cicd: github
-environments:
-  prd:
-    match_branch: refs/heads/main
-    stages:
-    - deploy
-    - local-test
-    - remote-test
-    - publish
