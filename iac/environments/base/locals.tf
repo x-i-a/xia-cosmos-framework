@@ -10,7 +10,10 @@ locals {
     for foundation, foundation_details in lookup(local.structure, "foundations", {}) : foundation => {
       name = foundation
       parent = "root"
+      repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", null)
       repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
+      template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", null)
+      template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", null)
     }
   }
 
@@ -27,13 +30,19 @@ locals {
         for foundation, foundation_details in lookup(details, "foundations", {}) : {
           realm = realm
           foundation = foundation
+          repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", null)
           repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
+          template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", null)
+          template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", null)
         }
       ]
     ]) : "${pair.realm}/${pair.foundation}" => {
       parent           = pair.realm
       name             = pair.foundation
+      repository_owner = pair.repository_owner
       repository_name  = pair.repository_name
+      template_owner   = pair.template_owner
+      template_name    = pair.template_name
     }
   }
 
@@ -59,14 +68,20 @@ locals {
             realm = realm
             sub_realm = sub_realm
             foundation = foundation
+            repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", null)
             repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
+            template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", null)
+            template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", null)
           }
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.foundation}" => {
       parent           = "${pair.realm}/${pair.sub_realm}"
       name             = pair.foundation
+      repository_owner = pair.repository_owner
       repository_name  = pair.repository_name
+      template_owner   = pair.template_owner
+      template_name    = pair.template_name
     }
   }
 
@@ -97,7 +112,10 @@ locals {
               sub_realm = sub_realm
               bis_realm = bis_realm
               foundation = foundation
+              repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", null)
               repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
+              template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", null)
+              template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", null)
             }
           ]
         ]
@@ -105,7 +123,10 @@ locals {
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}/${pair.foundation}" => {
       parent          = "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}"
       name            = pair.foundation
-      repository_name = pair.repository_name
+      repository_owner = pair.repository_owner
+      repository_name  = pair.repository_name
+      template_owner   = pair.template_owner
+      template_name    = pair.template_name
     }
   }
 
