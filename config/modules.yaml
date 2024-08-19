@@ -1,8 +1,8 @@
 xia-module:
   package: xia-module
   class: Module
-gcp-module-organization:
-  package: xia-module-gcp-project
-  class: Organization
-  events:
-    deploy:
+# gcp-module-organization:
+#   package: xia-module-gcp-project
+#   class: Organization
+#   events:
+#     deploy:
