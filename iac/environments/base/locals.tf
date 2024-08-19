@@ -10,7 +10,7 @@ locals {
     for foundation, foundation_details in lookup(local.structure, "foundations", {}) : foundation => {
       name = foundation
       parent = "root"
-      repository = lookup(foundation_details == null ?  {} : foundation_details, "repository", "foundation-${foundation}")
+      repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
     }
   }
 
@@ -27,13 +27,13 @@ locals {
         for foundation, foundation_details in lookup(details, "foundations", {}) : {
           realm = realm
           foundation = foundation
-          repository = lookup(foundation_details == null ?  {} : foundation_details, "repository", "foundation-${foundation}")
+          repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
         }
       ]
     ]) : "${pair.realm}/${pair.foundation}" => {
-      parent = pair.realm
-      name = pair.foundation
-      repository = pair.repository
+      parent           = pair.realm
+      name             = pair.foundation
+      repository_name  = pair.repository_name
     }
   }
 
@@ -59,14 +59,14 @@ locals {
             realm = realm
             sub_realm = sub_realm
             foundation = foundation
-            repository = lookup(foundation_details == null ?  {} : foundation_details, "repository", "foundation-${foundation}")
+            repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
           }
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.foundation}" => {
-      parent = "${pair.realm}/${pair.sub_realm}"
-      name = pair.foundation
-      repository = pair.repository
+      parent           = "${pair.realm}/${pair.sub_realm}"
+      name             = pair.foundation
+      repository_name  = pair.repository_name
     }
   }
 
@@ -97,15 +97,15 @@ locals {
               sub_realm = sub_realm
               bis_realm = bis_realm
               foundation = foundation
-              repository = lookup(foundation_details == null ?  {} : foundation_details, "repository", "foundation-${foundation}")
+              repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
             }
           ]
         ]
       ]
     ]) : "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}/${pair.foundation}" => {
-      parent = "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}"
-      name = pair.foundation
-      repository = pair.repository
+      parent          = "${pair.realm}/${pair.sub_realm}/${pair.bis_realm}"
+      name            = pair.foundation
+      repository_name = pair.repository_name
     }
   }
 
