@@ -2,6 +2,7 @@ locals {
   landscape = yamldecode(file(var.landscape_file))
   settings = lookup(local.landscape, "settings", {})
   structure = local.landscape["structure"]
+  modules = yamldecode(file(var.modules_file))
 }
 
 locals {
