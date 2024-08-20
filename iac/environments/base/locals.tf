@@ -137,6 +137,6 @@ locals {
     }
   }
 
-  all_realms = merge(local.level_1_realms, local.level_2_realms, local.level_3_realms)
-  all_foundations = merge(local.level_0_foundations, local.level_1_foundations, local.level_2_foundations, local.level_3_foundations)
+  realms = merge(local.level_1_realms, local.level_2_realms, local.level_3_realms)
+  foundations = merge(local.level_0_foundations, local.level_1_foundations, local.level_2_foundations, local.level_3_foundations)
 }
