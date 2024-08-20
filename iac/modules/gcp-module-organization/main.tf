@@ -40,30 +40,30 @@ resource "google_project_service" "identity_and_access_manager_api" {
 }
 
 resource "google_folder" "realm_l1_folders" {
-  for_each = local.level_1_realms
-  display_name = each.value.name
+  for_each = var.level_1_realms
+  display_name = each.value["name"]
   parent       = "organizations/${data.google_organization.cosmos_org.org_id}"
 }
 
 resource "google_folder" "realm_l2_folders" {
-  for_each = local.level_2_realms
-  display_name = each.value.name
-  parent       = google_folder.realm_l1_folders[each.value.parent].name
+  for_each = var.level_2_realms
+  display_name = each.value["name"]
+  parent       = google_folder.realm_l1_folders[each.value["parent"]].name
 }
 
 resource "google_folder" "realm_l3_folders" {
-  for_each = local.level_3_realms
-  display_name = each.value.name
-  parent       = google_folder.realm_l2_folders[each.value.parent].name
+  for_each = var.level_3_realms
+  display_name = each.value["name"]
+  parent       = google_folder.realm_l2_folders[each.value["parent"]].name
 }
 
 resource "google_folder" "foundation_folders" {
   for_each = var.foundations
-  display_name = each.value.name
+  display_name = each.value["name"]
   parent       = coalesce(
-    lookup(lookup(google_folder.realm_l1_folders, each.value.parent, {}), "name", ""),
-    lookup(lookup(google_folder.realm_l2_folders, each.value.parent, {}), "name", ""),
-    lookup(lookup(google_folder.realm_l3_folders, each.value.parent, {}), "name", ""),
+    lookup(lookup(google_folder.realm_l1_folders, each.value["parent"], {}), "name", ""),
+    lookup(lookup(google_folder.realm_l2_folders, each.value["parent"], {}), "name", ""),
+    lookup(lookup(google_folder.realm_l3_folders, each.value["parent"], {}), "name", ""),
     "organizations/${data.google_organization.cosmos_org.org_id}"
   )
 }
