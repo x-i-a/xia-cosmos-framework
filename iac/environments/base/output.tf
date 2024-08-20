@@ -1,3 +1,3 @@
-output "all_foundations" {
-  value = local.all_foundations
+output "foundations" {
+  value = local.foundations
 }
