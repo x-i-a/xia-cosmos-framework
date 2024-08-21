@@ -6,6 +6,11 @@ gcp-module-organization:
   class: Organization
   events:
     deploy:
+gcp-module-project:
+  package: xia-module-gcp-project
+  class: Project
+  events:
+    activate:
 gh-module-foundation:
   package: xia-module-application-gh
   class: Foundation
