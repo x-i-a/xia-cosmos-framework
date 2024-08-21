@@ -11,8 +11,8 @@ gh-module-foundation:
   class: Foundation
   events:
     deploy:
-module-state-gcs:
+module-foundation-state-gcs:
   package: xia-module-terraform-gcs
-  class: GcsState
+  class: FoundationGcsStateGcsState
   events:
-    activate:
+    deploy:
