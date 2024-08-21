@@ -6,6 +6,11 @@ gcp-module-organization:
   class: Organization
   events:
     deploy:
+gh-module-foundation:
+  package: xia-module-application-gh
+  class: Foundation
+  events:
+    deploy:
 module-state-gcs:
   package: xia-module-terraform-gcs
   class: GcsState

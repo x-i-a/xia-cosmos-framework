@@ -7,5 +7,7 @@ packages:
   xia-module:
   xia-module-gcp-project:
     repository: develop
+  gh-module-foundation:
+    repository: develop
   xia-module-terraform-gcs:
     repository: develop
