@@ -1,13 +1,13 @@
 xia-module:
   package: xia-module
   class: Module
+gcp-module-organization:
+  package: xia-module-gcp-project
+  class: Organization
+  events:
+    deploy:
 module-state-gcs:
   package: xia-module-terraform-gcs
   class: GcsState
   events:
     activate:
-# gcp-module-organization:
-#   package: xia-module-gcp-project
-#   class: Organization
-#   events:
-#     deploy:
