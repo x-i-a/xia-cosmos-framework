@@ -71,7 +71,7 @@ resource "google_folder" "foundation_folders" {
 resource "google_service_account" "foundation_admin_sa" {
   for_each = var.foundations
   project      = local.cosmos_project
-  account_id   = "dir-${each.value["name"]}-sa"
+  account_id   = "adm-${each.value["name"]}-sa"
   display_name = "Service Account for Foundation Directory ${each.value["name"]}"
   depends_on = [google_folder.foundation_folders]
 }
