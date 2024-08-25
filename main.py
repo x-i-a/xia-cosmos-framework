@@ -1,7 +1,6 @@
 import argparse
 from xia_framework import Cosmos, Foundation
 
-
 def main():
     # Top level parser
     parser = argparse.ArgumentParser(description='Foundation tools')
