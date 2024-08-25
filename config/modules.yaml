@@ -23,11 +23,16 @@ gh-module-application:
     activate:
 module-foundation-state-gcs:
   package: xia-module-terraform-gcs
-  class: FoundationGcsStateGcsState
+  class: FoundationGcsState
   events:
     deploy:
 module-application-state-gcs:
   package: xia-module-terraform-gcs
-  class: ApplicationGcsStateGcsState
+  class: ApplicationGcsState
   events:
     activate:
+module-foundation-backend-gcs:
+  package: xia-module-terraform-gcs
+  class: FoundationGcsBackend
+  events:
+    deploy:
