@@ -19,13 +19,9 @@ bigbang: init
 		python main.py bigbang -p $(realm_project); \
 	fi
 
-birth: init
-	@if [ -z "$(foundation_name)" ]; then \
-		echo "Foundation name not specified. Usage: make birth foundation_name=<foundation_name>"; \
-	else \
-	    . .venv/bin/activate; \
-		python main.py birth -n $(foundation_name); \
-	fi
+plan: init
+	@. .venv/bin/activate; \
+	python -m xia_framework.cosmos plan
 
 apply: init
 	@. .venv/bin/activate; \
