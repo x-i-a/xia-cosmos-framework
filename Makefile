@@ -8,7 +8,8 @@ init:
 	until [ -f .venv/bin/python3 ]; do sleep 1; done; \
 	until [ -f .venv/bin/activate ]; do sleep 1; done;
 	. .venv/bin/activate; \
-	pip install PyYAML xia-framework keyring setuptools wheel; \
+    pip install git+https://github.com/x-i-a/xia-framework.git
+	pip install PyYAML keyring setuptools wheel; \
     pip install keyrings.google-artifactregistry-auth; \
 
 bigbang: init
@@ -28,7 +29,7 @@ birth: init
 
 apply: init
 	@. .venv/bin/activate; \
-	python main.py prepare
+	python -m xia_framework.cosmos apply
 
 init-module: init
 	@if [ -z "$(module_class)" ] || [ -z "$(package)" ]; then \
