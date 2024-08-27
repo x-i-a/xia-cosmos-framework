@@ -27,6 +27,10 @@ apply: init
 	@. .venv/bin/activate; \
 	python -m xia_framework.cosmos apply
 
+destroy: init
+	@. .venv/bin/activate; \
+	python -m xia_framework.cosmos destroy
+
 init-module: init
 	@if [ -z "$(module_class)" ] || [ -z "$(package)" ]; then \
 		echo "Module name not specified. Usage: make init-module module_class=<module_class> package=<package>"; \
