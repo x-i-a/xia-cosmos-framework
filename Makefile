@@ -32,20 +32,24 @@ bigbang: init
 	fi
 
 init-module: init
-	@if [ -z "$(module_uri)" ] ; then \
+	@. .venv/bin/activate; \
+	if [ -z "$(module_uri)" ] ; then \
 		echo "Module URI not specified. Usage: make init-module module_uri=<package_name>@<version>/<module_name>"; \
 	else \
 		python -m xia_framework.cosmos init-module -n $(module_uri); \
 	fi
 
 activate-module: init
-	@if [ -z "$(module_uri)" ] ; then \
+	@. .venv/bin/activate; \
+	if [ -z "$(module_uri)" ] ; then \
 		echo "Module URI not specified. Usage: make activate-module module_uri=<package_name>@<version>/<module_name>"; \
 	else \
 		python -m xia_framework.cosmos activate-module -n $(module_uri); \
 	fi
+
 create-app: init
-	@if [ -z "$(app_name)" ]; then \
+	@. .venv/bin/activate; \
+	if [ -z "$(app_name)" ]; then \
 		echo "Application name not specified. Usage: make create-app app_name=<app_name>"; \
 	else \
 		python main.py create-app $(app_name); \
