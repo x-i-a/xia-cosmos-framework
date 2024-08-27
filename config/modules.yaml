@@ -1,38 +1,30 @@
 xia-module:
   package: xia-module
-  class: Module
 gcp-module-organization:
   package: xia-module-gcp-project
-  class: Organization
   events:
     deploy:
 gcp-module-project:
   package: xia-module-gcp-project
-  class: Project
   events:
     activate:
 gh-module-foundation:
   package: xia-module-application-gh
-  class: Foundation
   events:
     deploy:
 gh-module-application:
   package: xia-module-application-gh
-  class: Application
   events:
     activate:
 module-foundation-state-gcs:
   package: xia-module-terraform-gcs
-  class: FoundationGcsState
   events:
     deploy:
 module-application-state-gcs:
   package: xia-module-terraform-gcs
-  class: ApplicationGcsState
   events:
     activate:
 module-foundation-backend-gcs:
   package: xia-module-terraform-gcs
-  class: FoundationGcsBackend
   events:
     deploy:
