@@ -1,12 +1,6 @@
 git: github
 settings:
   cosmos_name: xia-cosmos
-  cosmos_bucket: xia-cosmos
-  cosmos_project: xia-cosmos
-  cosmos_org: x-i-a.com
-  github_owner: x-i-a
-  github_tpl_owner: x-i-a
-  github_tpl_foundation: xia-template-foundation
   default_visibility: public
   default_owner: x-i-a
   default_tpl_owner: x-i-a

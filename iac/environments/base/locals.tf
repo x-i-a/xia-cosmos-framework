@@ -12,7 +12,7 @@ locals {
       parent = "root"
       visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_visibility", null))
       repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_owner", null))
-      repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
+      repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", foundation)
       template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.settings, "default_tpl_owner", null))
       template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.settings, "default_tpl_name", null))
     }
