@@ -1,4 +1,4 @@
-.PHONY: all bigbang birth apply init-module create-application
+.PHONY: all bigbang init plan apply destroy init-module activate-module
 
 all:
 	@echo "Specify a command to run"
@@ -46,12 +46,4 @@ activate-module: init
 		echo "Module URI not specified. Usage: make activate-module module_uri=<package_name>@<version>/<module_name>"; \
 	else \
 		python -m xia_framework.cosmos activate-module -n $(module_uri); \
-	fi
-
-create-app: init
-	@. .venv/bin/activate; \
-	if [ -z "$(app_name)" ]; then \
-		echo "Application name not specified. Usage: make create-app app_name=<app_name>"; \
-	else \
-		python main.py create-app $(app_name); \
 	fi
