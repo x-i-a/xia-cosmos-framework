@@ -8,9 +8,7 @@ init:
 	until [ -f .venv/bin/python3 ]; do sleep 1; done; \
 	until [ -f .venv/bin/activate ]; do sleep 1; done;
 	. .venv/bin/activate; \
-    pip install git+https://github.com/x-i-a/xia-framework.git; \
-    pip install git+https://github.com/x-i-a/xia-module.git; \
-	pip install PyYAML keyring setuptools wheel; \
+	pip install PyYAML xia-framework keyring setuptools wheel; \
     pip install keyrings.google-artifactregistry-auth; \
 
 plan: init
@@ -26,11 +24,8 @@ destroy: init
 	python -m xia_framework.cosmos destroy
 
 bigbang: init
-	@if [ -z "$(realm_project)" ]; then \
-		echo "Realm project not specified. Usage: make bigbang realm_project=<realm_project>"; \
-	else \
-		python main.py bigbang -p $(realm_project); \
-	fi
+	@. .venv/bin/activate; \
+	python -m xia_framework.cosmos bigbang
 
 init-module: init
 	@. .venv/bin/activate; \
