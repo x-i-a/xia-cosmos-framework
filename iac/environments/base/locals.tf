@@ -1,6 +1,7 @@
 locals {
   landscape = yamldecode(file(var.landscape_file))
   settings = lookup(local.landscape, "settings", {})
+  foundation_defaults = lookup(local.landscape, "foundations", {})
   structure = local.landscape["structure"]
   modules = yamldecode(file(var.modules_file))
 }
@@ -10,11 +11,11 @@ locals {
     for foundation, foundation_details in lookup(local.structure, "foundations", {}) : foundation => {
       name = foundation
       parent = "root"
-      visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_visibility", null))
-      repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_owner", null))
+      visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_visibility", null))
+      repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_owner", null))
       repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", foundation)
-      template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.settings, "default_tpl_owner", null))
-      template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.settings, "default_tpl_name", null))
+      template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.foundation_defaults, "default_tpl_owner", null))
+      template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.foundation_defaults, "default_tpl_name", null))
     }
   }
 
@@ -31,11 +32,11 @@ locals {
         for foundation, foundation_details in lookup(details, "foundations", {}) : {
           realm = realm
           foundation = foundation
-          visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_visibility", null))
-          repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_owner", null))
-          repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
-          template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.settings, "default_tpl_owner", null))
-          template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.settings, "default_tpl_name", null))
+          visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_visibility", null))
+          repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_owner", null))
+          repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", foundation)
+          template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.foundation_defaults, "default_tpl_owner", null))
+          template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.foundation_defaults, "default_tpl_name", null))
         }
       ]
     ]) : "${pair.realm}/${pair.foundation}" => {
@@ -71,11 +72,11 @@ locals {
             realm = realm
             sub_realm = sub_realm
             foundation = foundation
-            visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_visibility", null))
-            repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_owner", null))
-            repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
-            template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.settings, "default_tpl_owner", null))
-            template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.settings, "default_tpl_name", null))
+            visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_visibility", null))
+            repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_owner", null))
+            repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", foundation)
+            template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.foundation_defaults, "default_tpl_owner", null))
+            template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.foundation_defaults, "default_tpl_name", null))
           }
         ]
       ]
@@ -117,11 +118,11 @@ locals {
               sub_realm = sub_realm
               bis_realm = bis_realm
               foundation = foundation
-              visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_visibility", null))
-              repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.settings, "default_owner", null))
-              repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", "foundation-${foundation}")
-              template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.settings, "default_tpl_owner", null))
-              template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.settings, "default_tpl_name", null))
+              visibility = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_visibility", null))
+              repository_owner = lookup(foundation_details == null ?  {} : foundation_details, "repository_owner", lookup(local.foundation_defaults, "default_owner", null))
+              repository_name = lookup(foundation_details == null ?  {} : foundation_details, "repository_name", foundation)
+              template_owner = lookup(foundation_details == null ?  {} : foundation_details, "template_owner", lookup(local.foundation_defaults, "default_tpl_owner", null))
+              template_name = lookup(foundation_details == null ?  {} : foundation_details, "template_name", lookup(local.foundation_defaults, "default_tpl_name", null))
             }
           ]
         ]
