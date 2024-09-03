@@ -18,3 +18,8 @@ structure:
         xia-framework:
           repository_name: xia-foundation-framework
           repository: xia-foundation-framework
+    test:
+      foundations:
+        xia-test:
+          repository_name: xia-foundation-test
+          repository: xia-foundation-framework
