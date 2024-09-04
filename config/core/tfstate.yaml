@@ -10,4 +10,4 @@ org_buckets:
     bucket_project: xia-cosmos
     bucket_region: eu
     bucket_orgs:
-      - test/xia-framework
+      - protocol/xia-framework
