@@ -10,5 +10,3 @@ org_buckets:
   xia-cosmos-bucket:
     bucket_project: xia-cosmos
     bucket_region: eu
-    bucket_orgs:
-      - test/xia-test
