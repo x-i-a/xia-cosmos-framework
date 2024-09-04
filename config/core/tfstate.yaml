@@ -6,8 +6,7 @@ org_buckets:
     bucket_region: eu
     bucket_orgs:
       - test/xia-test
+      - protocol/xia-framework
   xia-cosmos-bucket:
     bucket_project: xia-cosmos
     bucket_region: eu
-    bucket_orgs:
-      - protocol/xia-framework
