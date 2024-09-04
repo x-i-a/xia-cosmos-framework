@@ -1,2 +1,13 @@
 backend: gcs
 tf_bucket: xia-cosmos
+org_buckets:
+  xia-test-bucket:
+    bucket_project: xia-cosmos
+    bucket_region: eu
+    bucket_orgs:
+      - test/xia-test
+  xia-cosmos-bucket:
+    bucket_project: xia-cosmos
+    bucket_region: eu
+    bucket_orgs:
+      - test/xia-125
