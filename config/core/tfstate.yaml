@@ -1,12 +1,2 @@
 backend: gcs
 tf_bucket: xia-cosmos
-org_buckets:
-  xia-test-bucket:
-    bucket_project: xia-cosmos
-    bucket_region: eu
-    bucket_orgs:
-      - tesZ
-      - protocol/xia-framework
-  xia-cosmos-bucket:
-    bucket_project: xia-cosmos
-    bucket_region: eu
